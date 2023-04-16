@@ -115,6 +115,11 @@ header {
     border-radius: 5px;
 }
 
+form input {
+    border: 1px solid black;
+    border-radius: inherit;
+}
+
 footer {
     position: absolute;
     bottom: 5px;
