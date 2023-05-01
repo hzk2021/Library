@@ -97,18 +97,26 @@ submitBookBtn.addEventListener('click', e => {
 
     e.preventDefault();
 
-    const bookTitle = document.querySelector(".modal form input[name='title']").value;
-    const bookAuthor = document.querySelector(".modal form input[name='author']").value;
-    const bookPages = document.querySelector(".modal form input[name='pages']").value;
+    const bookTitleField = document.querySelector(".modal form input[name='title']");
+    const bookAuthorField = document.querySelector(".modal form input[name='title']");
+    const bookPagesField = document.querySelector(".modal form input[name='title']");
+
+    const bookTitle = bookTitleField.value;
+    const bookAuthor = bookAuthorField.value;
+    const bookPages = bookPagesField.value;
     
     const bookStatusCheckbox = document.querySelector(".modal form input[name='has-read']");
 
     const bookIsRead = (bookStatusCheckbox.checked) ? true : false;
     
     const newBook = new Book(bookTitle, bookAuthor, bookPages, bookIsRead);
-    addBookToLibrary(newBook);
+    const isValid = validateInputs(newBook);
 
-    closeModal();
+    if (isValid)
+    {
+        addBookToLibrary(newBook);
+        closeModal();
+    }
 })
 
 
@@ -145,4 +153,29 @@ function closeModal() {
     
     modal.style.setProperty('visibility', 'hidden');
     overlay.style.setProperty('visibility', 'hidden');
+}
+
+function validateInputs(book) {
+    const inputs = Object.assign({}, book);
+
+    let isValid = true;
+    let errorMsg = 'No error!';
+    
+    if (inputs.title == '')
+    {   
+        return !isValid
+    }
+
+    if (inputs.author == '')
+    {   
+        return !isValid
+    }
+
+    if (inputs.numPages == '')
+    {   
+        return !isValid
+    }
+
+
+    return isValid;
 }
